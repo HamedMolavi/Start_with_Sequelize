@@ -1,0 +1,22 @@
+1. make connection with database => database/connection.js => There is no need to have connection in app.js, because you just need
+it to define your models (like in mongoose).
+
+2. So to make a model for each database table we require connection and use the sequelize syntax to make a model => database/models
+
+3. After making our models we need to migrate them. this means to make sure that a model will be sync to a existed table in database.
+But this action only needs to be runned once when server is going to be run for the first time => database/migrate.js => We need to
+require all of the models an sync them in this file, so when ever a new model is defined we need to alter this file too.
+
+4. To set the migrate.js run only once we can:
+    1) Set a script in package.json and run it only once in server first running.
+    2) Set a script called first and use third party module "npm-run-all".
+    3) You can run this file every time the server goes up, in this solution you can move loggin connection has established to
+    migrate file.
+
+5. After setting api routes, if you want to distinguish 400 and 500 errors, you can use instaseof => routes/user
+
+6. To do reusable our code we can write a function for it => urils/errorHandler
+
+7. Now lets go back to validation handling. make a property named "validate" in every coloumn of model. Then write your validations.
+Note the syntax. => database/models/User => to have a custom validation we can use "validator" package (see phone number field).
+
