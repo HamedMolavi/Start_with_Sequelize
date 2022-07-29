@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "migrate": "node ./database/migrate.js",
-    "first": "npm-run-all -s migrate dev",
+    "first": "npm-run-all -s migrate start",
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www"
   },

@@ -1,8 +1,10 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
 const connection = new Sequelize(process.env['DATABASE'], 'root', process.env['DATABASE_PASSWORD'], {
     host: 'localhost',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    logging: false,
 });
 
 (async function () {

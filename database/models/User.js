@@ -1,6 +1,8 @@
 const connection = require('../connection');
 const { Sequelize } = require('sequelize');
 const validator = require('validator');
+const Task = require('./Task');
+
 
 const User = connection.define('User', {
     // attributes
@@ -57,7 +59,7 @@ const User = connection.define('User', {
             notEmpty: { args: [true], msg: "Phone number is required!" },
             notNull: { msg: "Password is required!" },
             isTe(value) {
-                if (!validator.isMobilePhone(value, 'fa-IR')) throw new Error("Invalid phone number!")
+                if (!validator.isMobilePhone(value, 'fa-IR')) throw new Error("Invalid phone number!");
             },
         },
     }
@@ -66,5 +68,18 @@ const User = connection.define('User', {
     timestamps: true,
     tableName: 'users'
 });
+
+
+User.hasMany(Task, {
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+});
+Task.belongsTo(User);
+
+
+
+
+
+
 
 module.exports = User;
